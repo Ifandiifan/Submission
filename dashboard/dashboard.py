@@ -70,16 +70,23 @@ with st.sidebar:
     # Menambahkan logo perusahaan
     st.image("https://raw.githubusercontent.com/Ifandiifan/Logo/main/bike%20sharing.jpg")
     
-    # Mengambil start_date & end_date dari date_input
-   # start_date, end_date = st.date_input(
-       # label='Rentang Waktu',
-        #min_value=min_date,
-        #max_value=max_date,
-        #value=[min_date, max_date]
-   # )
+   #Pilih tanggal yang ingin ditampilkan
+selected_date = st.date_input(
+    label='Pilih Tanggal',
+    min_value=pd.to_datetime(all_df["dteday"].min()).date(),
+    max_value=pd.to_datetime(all_df["dteday"].max()).date(),
+    value=pd.to_datetime(all_df["dteday"].min()).date()  # Tanggal default
+)
 
-   # main_df = all_df[(all_df["dteday"] >= str(start_date)) & 
-               # (all_df["dteday"] <= str(end_date))]
+# Filter data sesuai dengan tanggal yang dipilih
+selected_data = all_df[all_df["dteday"] == str(selected_date)]
+
+# Tampilkan data
+st.write(f"Data untuk tanggal {selected_date}:")
+st.write(selected_data)
+
+# Tambahkan visualisasi atau analisis lainnya sesuai kebutuhan
+# ...
     
     st.header('Ifandi Bike Sharing :sparkles:')
 
