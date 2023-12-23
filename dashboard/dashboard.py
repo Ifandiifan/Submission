@@ -85,10 +85,8 @@ selected_data = all_df[all_df["dteday"] == str(selected_date)]
 st.write(f"Data untuk tanggal {selected_date}:")
 st.write(selected_data)
 
-# Tambahkan visualisasi atau analisis lainnya sesuai kebutuhan
-# ...
-    
-    st.header('Ifandi Bike Sharing :sparkles:')
+
+st.header('Ifandi Bike Sharing :sparkles:')
 
     data = {
     'season': [1, 2, 3, 4],
