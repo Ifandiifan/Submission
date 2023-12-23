@@ -37,7 +37,7 @@ max_date = pd.to_datetime(all_df["dteday"].max()).date()
 
 with st.sidebar:
     # Menambahkan logo perusahaan
-st.image("https://raw.githubusercontent.com/Ifandiifan/Logo/main/bike%20sharing.jpg")
+    st.image("https://raw.githubusercontent.com/Ifandiifan/Logo/main/bike%20sharing.jpg")
     
     # Pilih tanggal yang ingin ditampilkan
     selected_date = st.date_input(
@@ -57,7 +57,7 @@ st.image("https://raw.githubusercontent.com/Ifandiifan/Logo/main/bike%20sharing.
 # ... (sisa kode program tetap sama)
 
 
-st.header('Ifandi Bike Sharing :sparkles:')
+st.sidebar('Ifandi Bike Sharing :sparkles:')
 
 data = {
     'season': [1, 2, 3, 4],
