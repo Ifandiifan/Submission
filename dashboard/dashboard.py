@@ -1,12 +1,10 @@
-
-import os 
+import os
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 import streamlit as st
 from babel.numbers import format_currency
 sns.set(style='dark')
-
 
 # Dapatkan path absolut dari direktori skrip saat ini
 script_directory = os.path.dirname(os.path.abspath(__file__))
@@ -16,7 +14,6 @@ file_path = os.path.join(script_directory, 'all_data.csv')
 
 print(file_path)
 all_df = pd.read_csv(file_path)
-
 
 def create_day_df(df):
     # Menghitung jumlah penyewaan harian
@@ -32,35 +29,7 @@ def create_hour_df(df):
     hour_df.rename(columns={'cnt': 'total_rentals'}, inplace=True)
     return hour_df
 
-data = {
-    'season': [1, 2, 3, 4],
-    'cnt_mean': [2604.132597, 4992.331522, 5644.303191, 4728.162921],
-    'cnt_std': [1399.942119, 1695.977235, 1459.800381, 1699.615261]
-}
-df = pd.DataFrame(data)
-
-all_df = pd.read_csv("all_data.csv")
-df = all_df.drop_duplicates()
-summary_stats = df.describe()
-
-def extract_year_from_date(date):
-    return pd.to_datetime(date).year
-
-
-df['year'] = df['dteday'].apply(extract_year_from_date)
-
-def group_data_by_hour(df):
-    return df.groupby('hr')['cnt'].sum().reset_index()
-
-
-hourly_grouped_data = group_data_by_hour(df)
-
-
-def filter_data_by_year(df, year):
-    return df[df['year'] == year]
-
-
-filtered_data_2011 = filter_data_by_year(df, 2011)
+# ... (sisa fungsi-fungsi dan data frame tetap sama)
 
 # Pastikan min_date dan max_date adalah objek datetime.date
 min_date = pd.to_datetime(all_df["dteday"].min()).date()
@@ -70,20 +39,22 @@ with st.sidebar:
     # Menambahkan logo perusahaan
     st.image("https://raw.githubusercontent.com/Ifandiifan/Logo/main/bike%20sharing.jpg")
     
-   #Pilih tanggal yang ingin ditampilkan
-selected_date = st.date_input(
-    label='Pilih Tanggal',
-    min_value=pd.to_datetime(all_df["dteday"].min()).date(),
-    max_value=pd.to_datetime(all_df["dteday"].max()).date(),
-    value=pd.to_datetime(all_df["dteday"].min()).date()  # Tanggal default
-)
+    # Pilih tanggal yang ingin ditampilkan
+    selected_date = st.date_input(
+        label='Pilih Tanggal',
+        min_value=min_date,
+        max_value=max_date,
+        value=min_date  # Tanggal default
+    )
 
-# Filter data sesuai dengan tanggal yang dipilih
-selected_data = all_df[all_df["dteday"] == str(selected_date)]
+    # Filter data sesuai dengan tanggal yang dipilih
+    selected_data = all_df[all_df["dteday"] == str(selected_date)]
 
-# Tampilkan data
-st.write(f"Data untuk tanggal {selected_date}:")
-st.write(selected_data)
+    # Tampilkan data
+    st.write(f"Data untuk tanggal {selected_date}:")
+    st.write(selected_data)
+
+# ... (sisa kode program tetap sama)
 
 
 st.header('Ifandi Bike Sharing :sparkles:')
