@@ -71,15 +71,15 @@ with st.sidebar:
     st.image("https://raw.githubusercontent.com/Ifandiifan/Logo/main/bike%20sharing.jpg")
     
     # Mengambil start_date & end_date dari date_input
-    start_date, end_date = st.date_input(
-        label='Rentang Waktu',
-        min_value=min_date,
-        max_value=max_date,
-        value=[min_date, max_date]
-    )
+   # start_date, end_date = st.date_input(
+       # label='Rentang Waktu',
+        #min_value=min_date,
+        #max_value=max_date,
+        #value=[min_date, max_date]
+   # )
 
-    main_df = all_df[(all_df["dteday"] >= str(start_date)) & 
-                (all_df["dteday"] <= str(end_date))]
+   # main_df = all_df[(all_df["dteday"] >= str(start_date)) & 
+               # (all_df["dteday"] <= str(end_date))]
     
     st.header('Ifandi Bike Sharing :sparkles:')
 
