@@ -88,7 +88,7 @@ st.write(selected_data)
 
 st.header('Ifandi Bike Sharing :sparkles:')
 
-    data = {
+data = {
     'season': [1, 2, 3, 4],
     'cnt_mean': [2604.132597, 4992.331522, 5644.303191, 4728.162921],
     'cnt_std': [1399.942119, 1695.977235, 1459.800381, 1699.615261]
