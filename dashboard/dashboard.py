@@ -70,27 +70,28 @@ st.header('Ifandi Bike Sharing :sparkles:')
 selected_data_range['dteday'] = pd.to_datetime(selected_data_range['dteday'])
 day_df_range = create_day_df(selected_data_range)
 
-data = {
+# Membuat dataframe dari data musim
+data_season = {
     'season': [1, 2, 3, 4],
     'cnt_mean': [2604.132597, 4992.331522, 5644.303191, 4728.162921],
     'cnt_std': [1399.942119, 1695.977235, 1459.800381, 1699.615261]
 }
-
-# Membuat dataframe dari data
-df = pd.DataFrame(data)
+df_season = pd.DataFrame(data_season)
 
 # Plotting diagram garis untuk musim
-st.pyplot(plt.figure(figsize=(10, 6)))  # Tampilkan gambar di Streamlit
-plt.plot(df['season'], df['cnt_mean'], marker='o', color='blue', label='Rata-rata Sewa Sepeda')
-plt.errorbar(df['season'], df['cnt_mean'], yerr=df['cnt_std'], fmt='o', color='blue', capsize=5, label='Error Bar (Std)')
-plt.xlabel('Musim')
-plt.ylabel('Jumlah Rata-rata Sewa Sepeda')
-plt.title('Perbandingan Jumlah Rata-rata Sewa Sepeda Antara Musim')
-plt.xticks(df['season'], ['Musim Semi', 'Musim Panas', 'Musim Gugur', 'Musim Dingin'])
-plt.legend()
-plt.grid(True)
+fig_season, ax_season = plt.subplots(figsize=(10, 6))
+ax_season.plot(df_season['season'], df_season['cnt_mean'], marker='o', color='blue', label='Rata-rata Sewa Sepeda')
+ax_season.errorbar(df_season['season'], df_season['cnt_mean'], yerr=df_season['cnt_std'], fmt='o', color='blue', capsize=5, label='Error Bar (Std)')
+ax_season.set_xlabel('Musim')
+ax_season.set_ylabel('Jumlah Rata-rata Sewa Sepeda')
+ax_season.set_title('Perbandingan Jumlah Rata-rata Sewa Sepeda Antara Musim')
+ax_season.set_xticks(df_season['season'])
+ax_season.set_xticklabels(['Musim Semi', 'Musim Panas', 'Musim Gugur', 'Musim Dingin'])
+ax_season.legend()
+ax_season.grid(True)
 
-data = {
+# Membuat dataframe dari data jam
+data_hour = {
     'hr': list(range(24)),
     'cnt_mean': [53.898072, 33.375691, 22.869930, 11.727403, 6.352941, 19.889819, 76.044138, 212.064649, 
                  359.011004, 219.309491, 173.668501, 208.143054, 253.315934, 253.661180, 240.949246, 
@@ -99,32 +100,26 @@ data = {
                 235.189285, 93.703458, 102.205413, 127.495536, 145.081134, 148.107657, 147.271574, 144.632541,
                 148.682618, 232.656611, 224.639304, 161.050359, 119.670164, 89.788893, 69.937782, 50.846889]
 }
-
-# Membuat dataframe dari data
-df = pd.DataFrame(data)
+df_hour = pd.DataFrame(data_hour)
 
 # Plotting diagram garis untuk jam
-st.pyplot(plt.figure(figsize=(10, 6)))  # Tampilkan gambar di Streamlit
-plt.plot(df['hr'], df['cnt_mean'], marker='o', color='blue', label='Rata-rata Sewa Sepeda')
-plt.errorbar(df['hr'], df['cnt_mean'], yerr=df['cnt_std'], fmt='o', color='blue', capsize=5, label='Error Bar (Std)')
-plt.xlabel('Jam (hr)')
-plt.ylabel('Jumlah Rata-rata Sewa Sepeda')
-plt.title('Perbandingan Jumlah Rata-rata Sewa Sepeda Per Jam')
-plt.legend()
-plt.grid(True)
+fig_hour, ax_hour = plt.subplots(figsize=(10, 6))
+ax_hour.plot(df_hour['hr'], df_hour['cnt_mean'], marker='o', color='blue', label='Rata-rata Sewa Sepeda')
+ax_hour.errorbar(df_hour['hr'], df_hour['cnt_mean'], yerr=df_hour['cnt_std'], fmt='o', color='blue', capsize=5, label='Error Bar (Std)')
+ax_hour.set_xlabel('Jam (hr)')
+ax_hour.set_ylabel('Jumlah Rata-rata Sewa Sepeda')
+ax_hour.set_title('Perbandingan Jumlah Rata-rata Sewa Sepeda Per Jam')
+ax_hour.legend()
+ax_hour.grid(True)
 
-data = {
+# Membuat DataFrame untuk RFM
+data_rfm = {
     'dteday': ['2011-01-01'],
     'recency': [5],
     'frequency': [3],
     'cnt': [985]
 }
-
-# Membuat DataFrame
-rfm_df = pd.DataFrame(data)
-
-# Plotting diagram batang untuk RFM
-# ...
+rfm_df = pd.DataFrame(data_rfm)
 
 # Plotting diagram batang untuk RFM
 fig_rfm, axes_rfm = plt.subplots(nrows=1, ncols=3, figsize=(15, 5))
@@ -137,5 +132,7 @@ axes_rfm[2].set_title('Monetary (cnt)')
 
 plt.tight_layout()
 
-# Tampilkan gambar Matplotlib di Streamlit
+# Tampilkan gambar-gambar Matplotlib di Streamlit
+st.pyplot(fig_season)
+st.pyplot(fig_hour)
 st.pyplot(fig_rfm)
