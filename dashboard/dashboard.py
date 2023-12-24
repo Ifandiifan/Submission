@@ -38,11 +38,9 @@ max_date = pd.to_datetime(all_df["dteday"].max()).date()
 with st.sidebar:
     # Menambahkan logo perusahaan
     st.image("https://raw.githubusercontent.com/Ifandiifan/Logo/main/bike%20sharing.jpg")
-    
-   # ...
+ 
 
 with st.sidebar:
-    # ...
 
     # Pilih rentang waktu yang ingin ditampilkan
     selected_start_date = st.date_input(
@@ -62,41 +60,26 @@ with st.sidebar:
     # Filter data sesuai dengan rentang waktu yang dipilih
     selected_data_range = all_df[(all_df["dteday"] >= str(selected_start_date)) & (all_df["dteday"] <= str(selected_end_date))]
 
-# ...
+
 
 st.header('Ifandi Bike Sharing :sparkles:')
 
-# ...
 
-# Tampilkan data
-st.write(f"Data untuk rentang waktu {selected_start_date} hingga {selected_end_date}:")
-st.write(selected_data_range)
-
-# ...
-
-
-
-data = {
-    'season': [1, 2, 3, 4],
-    'cnt_mean': [2604.132597, 4992.331522, 5644.303191, 4728.162921],
-    'cnt_std': [1399.942119, 1695.977235, 1459.800381, 1699.615261]
-}
-
-# ...
 
 # Membuat dataframe dari data harian untuk rentang waktu yang dipilih
+selected_data_range['dteday'] = pd.to_datetime(selected_data_range['dteday'])
 day_df_range = create_day_df(selected_data_range)
 
+
 # Plotting diagram garis
-plt.figure(figsize=(10, 6))
-plt.plot(day_df_range['dteday'], day_df_range['total_rentals'], marker='o', color='green', label='Total Rentals')
-plt.xlabel('Tanggal')
-plt.ylabel('Jumlah Total Sewa Sepeda')
-plt.title('Grafik Jumlah Total Sewa Sepeda Harian')
-plt.xticks(rotation=45)
-plt.legend()
-plt.grid(True)
-plt.show()
+fig, ax = plt.subplots(figsize=(10, 6))
+ax.plot(day_df_range['dteday'], day_df_range['total_rentals'], marker='o', color='green', label='Total Rentals')
+ax.set_xlabel('Tanggal')
+ax.set_ylabel('Jumlah Total Sewa Sepeda')
+ax.set_title('Grafik Jumlah Total Sewa Sepeda Harian')
+ax.tick_params(axis='x', rotation=45)
+ax.legend()
+ax.grid(True)
 
-# ...
-
+# Tampilkan gambar Matplotlib di Streamlit
+st.pyplot(fig)
