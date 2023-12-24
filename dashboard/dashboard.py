@@ -80,16 +80,17 @@ data = {
 df = pd.DataFrame(data)
 
 # Plotting diagram garis untuk musim
-plt.figure(figsize=(10, 6))
-plt.plot(df['season'], df['cnt_mean'], marker='o', color='blue', label='Rata-rata Sewa Sepeda')
-plt.errorbar(df['season'], df['cnt_mean'], yerr=df['cnt_std'], fmt='o', color='blue', capsize=5, label='Error Bar (Std)')
-plt.xlabel('Musim')
-plt.ylabel('Jumlah Rata-rata Sewa Sepeda')
-plt.title('Perbandingan Jumlah Rata-rata Sewa Sepeda Antara Musim')
-plt.xticks(df['season'], ['Musim Semi', 'Musim Panas', 'Musim Gugur', 'Musim Dingin'])
-plt.legend()
-plt.grid(True)
-st.pyplot() 
+fig_season, ax_season = plt.subplots(figsize=(10, 6))
+ax_season.plot(df['season'], df['cnt_mean'], marker='o', color='blue', label='Rata-rata Sewa Sepeda')
+ax_season.errorbar(df['season'], df['cnt_mean'], yerr=df['cnt_std'], fmt='o', color='blue', capsize=5, label='Error Bar (Std)')
+ax_season.set_xlabel('Musim')
+ax_season.set_ylabel('Jumlah Rata-rata Sewa Sepeda')
+ax_season.set_title('Perbandingan Jumlah Rata-rata Sewa Sepeda Antara Musim')
+ax_season.set_xticks(df['season'])
+ax_season.set_xticklabels(['Musim Semi', 'Musim Panas', 'Musim Gugur', 'Musim Dingin'])
+ax_season.legend()
+ax_season.grid(True)
+st.pyplot(fig_season)
 
 data = {
     'hr': list(range(24)),
@@ -105,15 +106,15 @@ data = {
 df = pd.DataFrame(data)
 
 # Plotting diagram garis untuk jam
-plt.figure(figsize=(10, 6))
-plt.plot(df['hr'], df['cnt_mean'], marker='o', color='blue', label='Rata-rata Sewa Sepeda')
-plt.errorbar(df['hr'], df['cnt_mean'], yerr=df['cnt_std'], fmt='o', color='blue', capsize=5, label='Error Bar (Std)')
-plt.xlabel('Jam (hr)')
-plt.ylabel('Jumlah Rata-rata Sewa Sepeda')
-plt.title('Perbandingan Jumlah Rata-rata Sewa Sepeda Per Jam')
-plt.legend()
-plt.grid(True)
-st.pyplot()
+fig_hr, ax_hr = plt.subplots(figsize=(10, 6))
+ax_hr.plot(df['hr'], df['cnt_mean'], marker='o', color='blue', label='Rata-rata Sewa Sepeda')
+ax_hr.errorbar(df['hr'], df['cnt_mean'], yerr=df['cnt_std'], fmt='o', color='blue', capsize=5, label='Error Bar (Std)')
+ax_hr.set_xlabel('Jam (hr)')
+ax_hr.set_ylabel('Jumlah Rata-rata Sewa Sepeda')
+ax_hr.set_title('Perbandingan Jumlah Rata-rata Sewa Sepeda Per Jam')
+ax_hr.legend()
+ax_hr.grid(True)
+st.pyplot(fig_hr)
 
 data = {
     'dteday': ['2011-01-01'],
@@ -126,16 +127,15 @@ data = {
 rfm_df = pd.DataFrame(data)
 
 # Plotting diagram batang untuk RFM
-fig, axes = plt.subplots(nrows=1, ncols=3, figsize=(15, 5))
-axes[0].bar(rfm_df['dteday'], rfm_df['recency'], color='#72BCD4')
-axes[0].set_title('Recency')
-axes[1].bar(rfm_df['dteday'], rfm_df['frequency'], color='#72BCD4')
-axes[1].set_title('Frequency')
-axes[2].bar(rfm_df['dteday'], rfm_df['cnt'], color='#72BCD4')
-axes[2].set_title('Monetary (cnt)')
-
+fig_rfm, axes_rfm = plt.subplots(nrows=1, ncols=3, figsize=(15, 5))
+axes_rfm[0].bar(rfm_df['dteday'], rfm_df['recency'], color='#72BCD4')
+axes_rfm[0].set_title('Recency')
+axes_rfm[1].bar(rfm_df['dteday'], rfm_df['frequency'], color='#72BCD4')
+axes_rfm[1].set_title('Frequency')
+axes_rfm[2].bar(rfm_df['dteday'], rfm_df['cnt'], color='#72BCD4')
+axes_rfm[2].set_title('Monetary (cnt)')
 plt.tight_layout()
-st.pyplot()
+st.pyplot(fig_rfm) 
 
 
 # Tampilkan gambar Matplotlib di Streamlit
