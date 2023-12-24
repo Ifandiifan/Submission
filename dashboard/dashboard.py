@@ -60,16 +60,15 @@ with st.sidebar:
     # Filter data sesuai dengan rentang waktu yang dipilih
     selected_data_range = all_df[(all_df["dteday"] >= str(selected_start_date)) & (all_df["dteday"] <= str(selected_end_date))]
 
-
+# Tampilkan tabel data sesuai rentang waktu
+st.subheader("Tabel Data Sesuai Rentang Waktu")
+st.dataframe(selected_data_range)
 
 st.header('Ifandi Bike Sharing :sparkles:')
-
-
 
 # Membuat dataframe dari data harian untuk rentang waktu yang dipilih
 selected_data_range['dteday'] = pd.to_datetime(selected_data_range['dteday'])
 day_df_range = create_day_df(selected_data_range)
-
 # Membuat dataframe dari data musim
 data_season = {
     'season': [1, 2, 3, 4],
