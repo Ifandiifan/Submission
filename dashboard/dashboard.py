@@ -57,7 +57,7 @@ with st.sidebar:
 # ... (sisa kode program tetap sama)
 
 
-st.sidebar('Ifandi Bike Sharing :sparkles:')
+st.header('Ifandi Bike Sharing :sparkles:')
 
 data = {
     'season': [1, 2, 3, 4],
