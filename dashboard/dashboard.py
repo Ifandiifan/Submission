@@ -6,10 +6,7 @@ import streamlit as st
 from babel.numbers import format_currency
 sns.set(style='dark')
 
-# Dapatkan path absolut dari direktori skrip saat ini
 script_directory = os.path.dirname(os.path.abspath(__file__))
-
-# Gabungkan dengan nama file untuk membentuk path lengkap
 file_path = os.path.join(script_directory, 'all_data.csv')
 
 print(file_path)
@@ -29,8 +26,6 @@ def create_hour_df(df):
     hour_df.rename(columns={'cnt': 'total_rentals'}, inplace=True)
     return hour_df
 
-# ... (sisa fungsi-fungsi dan data frame tetap sama)
-
 # Pastikan min_date dan max_date adalah objek datetime.date
 min_date = pd.to_datetime(all_df["dteday"].min()).date()
 max_date = pd.to_datetime(all_df["dteday"].max()).date()
@@ -38,9 +33,6 @@ max_date = pd.to_datetime(all_df["dteday"].max()).date()
 with st.sidebar:
     # Menambahkan logo perusahaan
     st.image("https://raw.githubusercontent.com/Ifandiifan/Logo/main/bike%20sharing.jpg")
- 
-
-with st.sidebar:
 
     # Pilih rentang waktu yang ingin ditampilkan
     selected_start_date = st.date_input(
@@ -60,11 +52,10 @@ with st.sidebar:
     # Filter data sesuai dengan rentang waktu yang dipilih
     selected_data_range = all_df[(all_df["dteday"] >= str(selected_start_date)) & (all_df["dteday"] <= str(selected_end_date))]
 
+st.header('Ifandi Bike Sharing :sparkles:')
 # Tampilkan tabel data sesuai rentang waktu
 st.subheader("Tabel Data Sesuai Rentang Waktu")
 st.dataframe(selected_data_range)
-
-st.header('Ifandi Bike Sharing :sparkles:')
 
 # Membuat dataframe dari data harian untuk rentang waktu yang dipilih
 selected_data_range['dteday'] = pd.to_datetime(selected_data_range['dteday'])
@@ -128,7 +119,6 @@ axes_rfm[1].bar(rfm_df['dteday'], rfm_df['frequency'], color='#72BCD4')
 axes_rfm[1].set_title('Frequency')
 axes_rfm[2].bar(rfm_df['dteday'], rfm_df['cnt'], color='#72BCD4')
 axes_rfm[2].set_title('Monetary (cnt)')
-
 plt.tight_layout()
 
 # Tampilkan gambar-gambar Matplotlib di Streamlit
